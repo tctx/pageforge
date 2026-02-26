@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageForge — Beautiful Landing Pages in 60 Seconds</title>
+    <meta name="description" content="Generate professional, responsive landing pages instantly. No coding required. Free to use, premium templates available.">
+    <meta property="og:title" content="PageForge — Landing Pages in 60 Seconds">
+    <meta property="og:description" content="Generate professional, responsive landing pages instantly. No coding required.">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-2: #1a1a2e;
+            --border: #2a2a3e;
+            --text: #e0e0e8;
+            --text-dim: #8888a0;
+            --accent: #6c5ce7;
+            --accent-hover: #7d6ff0;
+            --accent-glow: rgba(108, 92, 231, 0.3);
+            --success: #00d2a0;
+            --warning: #f0a030;
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--text); }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Layout */
+        .app {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            min-height: calc(100vh - 57px);
+        }
+
+        @media (max-width: 1024px) {
+            .app {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar / Form */
+        .sidebar {
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 24px;
+            overflow-y: auto;
+            max-height: calc(100vh - 57px);
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        textarea { resize: vertical; min-height: 80px; }
+
+        .field { margin-bottom: 14px; }
+
+        .feature-group {
+            display: grid;
+            gap: 10px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .feature-item input:first-child {
+            font-weight: 600;
+        }
+
+        .color-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-picker input[type="color"] {
+            width: 36px;
+            height: 36px;
+            padding: 2px;
+            cursor: pointer;
+            border-radius: var(--radius);
+        }
+
+        .color-picker input[type="text"] {
+            flex: 1;
+        }
+
+        /* Template selector */
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .template-option {
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .template-option:hover {
+            border-color: var(--accent);
+        }
+
+        .template-option.selected {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .template-option .template-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .template-option .template-preview {
+            height: 60px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .template-option.locked::after {
+            content: 'PRO';
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: var(--warning);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .template-option.locked {
+            opacity: 0.6;
+        }
+
+        /* Pro Unlocked State */
+        body.pro-active .pro-banner {
+            background: linear-gradient(135deg, rgba(0, 210, 160, 0.15), rgba(0, 210, 160, 0.05));
+            border-color: rgba(0, 210, 160, 0.3);
+        }
+        body.pro-active .pro-banner h3,
+        body.pro-active .pro-banner .price,
+        body.pro-active .pro-banner p,
+        body.pro-active #proBuyBtn,
+        body.pro-active .pro-restore {
+            display: none;
+        }
+        .pro-banner .pro-active-msg {
+            display: none;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            padding: 4px 0;
+        }
+        body.pro-active .pro-banner .pro-active-msg {
+            display: block;
+        }
+        .pro-restore {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--text-dim);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #000;
+        }
+
+        .btn-success:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-group {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Preview */
+        .preview-area {
+            background: #1e1e2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+        }
+
+        .preview-frame {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            min-height: 500px;
+        }
+
+        .preview-frame iframe {
+            width: 100%;
+            height: 70vh;
+            border: none;
+        }
+
+        .preview-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            color: var(--text-dim);
+            text-align: center;
+            gap: 16px;
+        }
+
+        .preview-placeholder svg {
+            opacity: 0.3;
+        }
+
+        /* Pro banner */
+        .pro-banner {
+            background: linear-gradient(135deg, var(--accent-glow), rgba(0, 210, 160, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .pro-banner h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .pro-banner p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+
+        .pro-banner .price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .pro-banner .price span {
+            font-size: 13px;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+
+        .pro-banner .btn {
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .preview-area {
+                min-height: 400px;
+            }
+            .sidebar {
+                max-height: none;
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--success);
+            color: #000;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer-link {
+            text-align: center;
+            padding: 12px;
+            color: var(--text-dim);
+            font-size: 12px;
+        }
+
+        .footer-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Page<span>Forge</span></div>
+        <div class="header-actions">
+            <span class="badge">Free</span>
+        </div>
+    </header>
+
+    <div class="app">
+        <aside class="sidebar">
+            <div class="pro-banner">
+                <h3>Unlock 4 Premium Templates</h3>
+                <p>Gradient, SaaS, Minimal, and Dark Pro templates</p>
+                <div class="price">$9 <span>one-time</span></div>
+                <a href="https://buy.stripe.com/cNi5kD15QbNx9DV1JjeQM01" id="proBuyBtn" class="btn btn-primary" style="text-decoration:none" target="_blank">Get PageForge Pro</a>
+                <div class="pro-active-msg">Pro Unlocked</div>
+                <button class="pro-restore" onclick="restorePurchase()">Already purchased? Restore</button>
+            </div>
+
+            <!-- Template -->
+            <div class="section">
+                <div class="section-title">Template</div>
+                <div class="template-grid">
+                    <div class="template-option selected" data-template="midnight" onclick="selectTemplate(this)">
+                        <div class="template-preview" style="background: linear-gradient(180deg, #0a0a1a, #1a1a3e)"></div>
+                        <div class="template-name">Midnight</div>
+                    </div>
+                    <div class="template-option" data-template="clean" onclick="selectTemplate(this)">
+                        <div class="template-preview" style="background: linear-gradient(180deg, #fff, #f0f0f5)"></div>
+                        <div class="template-name">Clean</div>
+                    </div>
+                    <div class="template-option locked" data-template="gradient" onclick="selectTemplate(this)">
+                        <div class="template-preview" style="background: linear-gradient(135deg, #6c5ce7, #00d2a0)"></div>
+                        <div class="template-name">Gradient</div>
+                    </div>
+                    <div class="template-option locked" data-template="saas" onclick="selectTemplate(this)">
+                        <div class="template-preview" style="background: linear-gradient(180deg, #0f172a, #1e293b)"></div>
+                        <div class="template-name">SaaS Pro</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="section">
+                <div class="section-title">Content</div>
+
+                <div class="field">
+                    <label>Product Name</label>
+                    <input type="text" id="productName" placeholder="e.g. LaunchKit" oninput="updatePreview()">
+                </div>
+
+                <div class="field">
+                    <label>Tagline</label>
+                    <input type="text" id="tagline" placeholder="e.g. Ship your next idea in hours, not weeks" oninput="updatePreview()">
+                </div>
+
+                <div class="field">
+                    <label>Description</label>
+                    <textarea id="description" placeholder="A short paragraph about what your product does and why people need it..." oninput="updatePreview()"></textarea>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="section">
+                <div class="section-title">Features</div>
+                <div class="feature-group">
+                    <div class="feature-item">
+                        <input type="text" id="feat1Title" placeholder="Feature 1 title" oninput="updatePreview()">
+                        <input type="text" id="feat1Desc" placeholder="Short description" oninput="updatePreview()">
+                    </div>
+                    <div class="feature-item">
+                        <input type="text" id="feat2Title" placeholder="Feature 2 title" oninput="updatePreview()">
+                        <input type="text" id="feat2Desc" placeholder="Short description" oninput="updatePreview()">
+                    </div>
+                    <div class="feature-item">
+                        <input type="text" id="feat3Title" placeholder="Feature 3 title" oninput="updatePreview()">
+                        <input type="text" id="feat3Desc" placeholder="Short description" oninput="updatePreview()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="section">
+                <div class="section-title">Call to Action</div>
+                <div class="field">
+                    <label>Button Text</label>
+                    <input type="text" id="ctaText" placeholder="e.g. Get Started — $29" value="Get Started" oninput="updatePreview()">
+                </div>
+                <div class="field">
+                    <label>Button Link (Stripe, Gumroad, etc.)</label>
+                    <input type="url" id="ctaLink" placeholder="https://buy.stripe.com/..." oninput="updatePreview()">
+                </div>
+            </div>
+
+            <!-- Style -->
+            <div class="section">
+                <div class="section-title">Colors</div>
+                <div class="color-row">
+                    <div class="field">
+                        <label>Accent Color</label>
+                        <div class="color-picker">
+                            <input type="color" id="accentColor" value="#6c5ce7" oninput="syncColor('accent')">
+                            <input type="text" id="accentColorText" value="#6c5ce7" oninput="syncColorText('accent')">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Background</label>
+                        <div class="color-picker">
+                            <input type="color" id="bgColor" value="#0a0a1a" oninput="syncColor('bg')">
+                            <input type="text" id="bgColorText" value="#0a0a1a" oninput="syncColorText('bg')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="updatePreview()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    Preview
+                </button>
+                <button class="btn btn-success" onclick="downloadPage()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v10M4 8l4 4 4-4M2 14h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Download HTML
+                </button>
+                <button class="btn btn-secondary" onclick="copyHTML()">
+                    Copy HTML to Clipboard
+                </button>
+            </div>
+
+            <div class="footer-link">
+                <p>Built by <a href="#">Longshanks</a> — an AI entrepreneur</p>
+            </div>
+        </aside>
+
+        <main class="preview-area">
+            <div class="preview-frame" id="previewFrame">
+                <div class="preview-placeholder" id="placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18"/>
+                        <circle cx="7" cy="6" r="1" fill="currentColor"/>
+                        <circle cx="10" cy="6" r="1" fill="currentColor"/>
+                    </svg>
+                    <p>Fill in the form and click <strong>Preview</strong><br>to see your landing page</p>
+                </div>
+                <iframe id="previewIframe" style="display:none"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+    let selectedTemplate = 'midnight';
+    let proUnlocked = false;
+
+    function unlockPro(silent) {
+        proUnlocked = true;
+        localStorage.setItem('pageforge_pro', 'true');
+
+        // Remove locked class from premium templates
+        document.querySelectorAll('.template-option.locked').forEach(function(el) {
+            el.classList.remove('locked');
+        });
+
+        // Activate pro state on body (drives CSS changes for banner/badge)
+        document.body.classList.add('pro-active');
+
+        // Update header badge
+        var badge = document.querySelector('.header-actions .badge');
+        if (badge) {
+            badge.textContent = 'Pro';
+            badge.style.background = 'var(--success)';
+            badge.style.color = '#000';
+        }
+
+        if (!silent) {
+            showToast('PageForge Pro unlocked! All templates available.');
+        }
+    }
+
+    function checkProStatus() {
+        // 1. Check URL params — Stripe redirect after successful checkout
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('checkout') === 'success' || params.has('session_id')) {
+            unlockPro();
+            // Clean the URL so params don't persist on refresh
+            window.history.replaceState({}, '', window.location.pathname);
+            return;
+        }
+
+        // 2. Check localStorage for persisted pro state
+        if (localStorage.getItem('pageforge_pro') === 'true') {
+            unlockPro(true);
+        }
+    }
+
+    function restorePurchase() {
+        // Check if pro was previously saved
+        if (localStorage.getItem('pageforge_pro') === 'true') {
+            unlockPro();
+            return;
+        }
+        // Prompt: no record found — they need to complete purchase first
+        showToast('No purchase found. Complete checkout, then return here to activate.');
+    }
+
+    function selectTemplate(el) {
+        const template = el.dataset.template;
+        if (['gradient', 'saas'].includes(template) && !proUnlocked) {
+            showToast('Unlock premium templates with PageForge Pro!');
+            return;
+        }
+        document.querySelectorAll('.template-option').forEach(t => t.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedTemplate = template;
+        updatePreview();
+    }
+
+    function syncColor(type) {
+        const color = document.getElementById(type + 'Color').value;
+        document.getElementById(type + 'ColorText').value = color;
+        updatePreview();
+    }
+
+    function syncColorText(type) {
+        const val = document.getElementById(type + 'ColorText').value;
+        if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+            document.getElementById(type + 'Color').value = val;
+            updatePreview();
+        }
+    }
+
+    function getFormData() {
+        return {
+            name: document.getElementById('productName').value || 'Your Product',
+            tagline: document.getElementById('tagline').value || 'Ship faster, build smarter',
+            description: document.getElementById('description').value || 'A powerful solution that helps you get more done in less time.',
+            features: [
+                { title: document.getElementById('feat1Title').value || 'Fast Setup', desc: document.getElementById('feat1Desc').value || 'Get started in minutes, not hours' },
+                { title: document.getElementById('feat2Title').value || 'Beautiful Design', desc: document.getElementById('feat2Desc').value || 'Professional look out of the box' },
+                { title: document.getElementById('feat3Title').value || 'Easy Integration', desc: document.getElementById('feat3Desc').value || 'Works with your existing tools' }
+            ],
+            ctaText: document.getElementById('ctaText').value || 'Get Started',
+            ctaLink: document.getElementById('ctaLink').value || '#',
+            accent: document.getElementById('accentColor').value,
+            bg: document.getElementById('bgColor').value,
+            template: selectedTemplate
+        };
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function generateHTML(data) {
+        if (selectedTemplate === 'gradient') return generateGradientHTML(data);
+        if (selectedTemplate === 'saas') return generateSaaSHTML(data);
+
+        const isDark = selectedTemplate === 'midnight';
+        const textColor = isDark ? '#e0e0e8' : '#1a1a2e';
+        const dimColor = isDark ? '#8888a0' : '#666680';
+        const surfaceColor = isDark ? lightenColor(data.bg, 10) : darkenColor(data.bg, 5);
+        const cardBg = isDark ? lightenColor(data.bg, 15) : '#ffffff';
+        const cardBorder = isDark ? lightenColor(data.bg, 25) : '#e0e0e8';
+        const heroStyle = isDark ? `background: ${data.bg}; padding: 100px 24px;` : `background: ${data.bg}; padding: 100px 24px;`;
+
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHTML(data.name)} — ${escapeHTML(data.tagline)}</title>
+<meta name="description" content="${escapeHTML(data.description)}">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:${textColor};line-height:1.6;background:${data.bg}}
+.hero{${heroStyle}text-align:center;min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:-1.5px;margin-bottom:16px;max-width:800px}
+.hero .tagline{font-size:clamp(18px,2.5vw,24px);color:${dimColor};margin-bottom:32px;max-width:600px}
+.hero .desc{font-size:16px;color:${dimColor};max-width:560px;margin-bottom:40px;line-height:1.7}
+.cta-btn{display:inline-block;padding:16px 40px;background:${data.accent};color:#fff;text-decoration:none;border-radius:8px;font-size:18px;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px ${data.accent}44}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px ${data.accent}66}
+.features{padding:80px 24px;background:${surfaceColor}}
+.features-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:32px}
+.feature-card{background:${cardBg};border:1px solid ${cardBorder};border-radius:12px;padding:32px;transition:transform 0.2s}
+.feature-card:hover{transform:translateY(-4px)}
+.feature-card h3{font-size:18px;margin-bottom:8px;color:${textColor}}
+.feature-card p{font-size:14px;color:${dimColor};line-height:1.6}
+.feature-icon{width:48px;height:48px;border-radius:10px;background:${data.accent}22;display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:${data.accent};font-size:22px;font-weight:700}
+.bottom-cta{padding:80px 24px;text-align:center;background:${data.bg}}
+.bottom-cta h2{font-size:32px;font-weight:700;margin-bottom:16px}
+.bottom-cta p{color:${dimColor};margin-bottom:32px;font-size:16px}
+footer{text-align:center;padding:24px;color:${dimColor};font-size:13px;border-top:1px solid ${cardBorder}}
+@media(max-width:600px){.hero{padding:60px 20px}.features{padding:40px 20px}}
+</style>
+</head>
+<body>
+<section class="hero">
+<h1>${escapeHTML(data.name)}</h1>
+<p class="tagline">${escapeHTML(data.tagline)}</p>
+<p class="desc">${escapeHTML(data.description)}</p>
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+</section>
+<section class="features">
+<div class="features-inner">
+${data.features.map((f, i) => `<div class="feature-card">
+<div class="feature-icon">${['◆', '▲', '●'][i]}</div>
+<h3>${escapeHTML(f.title)}</h3>
+<p>${escapeHTML(f.desc)}</p>
+</div>`).join('\n')}
+</div>
+</section>
+<section class="bottom-cta">
+<h2>Ready to get started?</h2>
+<p>Join hundreds of happy customers using ${escapeHTML(data.name)}.</p>
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+</section>
+<footer>
+<p>&copy; ${new Date().getFullYear()} ${escapeHTML(data.name)}. All rights reserved.</p>
+</footer>
+</body>
+</html>`;
+    }
+
+    function generateGradientHTML(data) {
+        const accent2 = shiftHue(data.accent, 60);
+        const accent3 = shiftHue(data.accent, 120);
+
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHTML(data.name)} — ${escapeHTML(data.tagline)}</title>
+<meta name="description" content="${escapeHTML(data.description)}">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#fff;line-height:1.6;background:${data.bg};overflow-x:hidden}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(0.95)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px;background:linear-gradient(135deg,${data.bg},${lightenColor(data.bg,8)});overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg at 50% 50%,${data.accent}11,${accent2}11,${accent3}11,${data.accent}11);animation:gradientShift 15s ease infinite;background-size:200% 200%;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;animation:float 8s ease-in-out infinite;pointer-events:none}
+.orb-1{width:400px;height:400px;background:${data.accent};top:-10%;right:-10%;animation-delay:0s}
+.orb-2{width:300px;height:300px;background:${accent2};bottom:-5%;left:-5%;animation-delay:-3s}
+.orb-3{width:250px;height:250px;background:${accent3};top:40%;left:60%;animation-delay:-6s}
+.hero-content{position:relative;z-index:1;animation:fadeUp 0.8s ease-out}
+.hero h1{font-size:clamp(40px,7vw,72px);font-weight:800;letter-spacing:-2px;margin-bottom:20px;max-width:800px;background:linear-gradient(135deg,#fff,${data.accent},${accent2});-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.hero .tagline{font-size:clamp(18px,2.5vw,24px);color:rgba(255,255,255,0.7);margin-bottom:16px;max-width:600px}
+.hero .desc{font-size:16px;color:rgba(255,255,255,0.5);max-width:560px;margin-bottom:48px;line-height:1.8}
+.cta-btn{position:relative;display:inline-block;padding:18px 48px;color:#fff;text-decoration:none;border-radius:12px;font-size:18px;font-weight:700;background:linear-gradient(135deg,${data.accent},${accent2});box-shadow:0 8px 32px ${data.accent}55;transition:all 0.4s;overflow:hidden}
+.cta-btn::before{content:'';position:absolute;inset:-2px;border-radius:14px;background:linear-gradient(135deg,${data.accent},${accent2},${accent3});z-index:-1;filter:blur(4px);opacity:0.6;transition:opacity 0.4s}
+.cta-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 40px ${data.accent}77}
+.cta-btn:hover::before{opacity:1}
+.features{padding:100px 24px;background:${data.bg};position:relative}
+.features-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.feature-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:36px;transition:all 0.4s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(135deg,${data.accent}44,transparent,${accent2}44);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:0;transition:opacity 0.4s}
+.feature-card:hover{transform:translateY(-6px);background:rgba(255,255,255,0.08)}
+.feature-card:hover::before{opacity:1}
+.feature-card h3{font-size:18px;margin-bottom:10px;font-weight:700}
+.feature-card p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7}
+.feature-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,${data.accent}33,${accent2}33);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px;font-weight:700;color:${data.accent}}
+.section-label{text-align:center;margin-bottom:48px}
+.section-label span{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(135deg,${data.accent}22,${accent2}22);border:1px solid ${data.accent}33;color:${data.accent}}
+.bottom-cta{padding:100px 24px;text-align:center;position:relative;background:linear-gradient(180deg,${data.bg},${lightenColor(data.bg,5)})}
+.bottom-cta h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#fff,${data.accent});-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bottom-cta p{color:rgba(255,255,255,0.5);margin-bottom:40px;font-size:16px}
+.divider{width:80px;height:3px;background:linear-gradient(90deg,${data.accent},${accent2});margin:0 auto 48px;border-radius:2px}
+footer{text-align:center;padding:32px;color:rgba(255,255,255,0.3);font-size:13px;border-top:1px solid rgba(255,255,255,0.06)}
+@media(max-width:600px){.hero{padding:80px 20px}.features{padding:60px 20px}.orb{opacity:0.2}}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="hero-content">
+<h1>${escapeHTML(data.name)}</h1>
+<p class="tagline">${escapeHTML(data.tagline)}</p>
+<p class="desc">${escapeHTML(data.description)}</p>
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+</div>
+</section>
+<section class="features">
+<div class="section-label"><span>Features</span></div>
+<div class="divider"></div>
+<div class="features-inner">
+${data.features.map((f, i) => `<div class="feature-card">
+<div class="feature-icon">${['◆', '▲', '●'][i]}</div>
+<h3>${escapeHTML(f.title)}</h3>
+<p>${escapeHTML(f.desc)}</p>
+</div>`).join('\n')}
+</div>
+</section>
+<section class="bottom-cta">
+<h2>Ready to get started?</h2>
+<p>Join hundreds of happy customers using ${escapeHTML(data.name)}.</p>
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+</section>
+<footer>
+<p>&copy; ${new Date().getFullYear()} ${escapeHTML(data.name)}. All rights reserved.</p>
+</footer>
+</body>
+</html>`;
+    }
+
+    function generateSaaSHTML(data) {
+        const bgLight = lightenColor(data.bg, 8);
+        const bgLighter = lightenColor(data.bg, 15);
+        const borderColor = lightenColor(data.bg, 20);
+        const dimColor = '#8888a0';
+        const featureIcons = [
+            `<svg width="24" height="24" fill="none" stroke="${data.accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+            `<svg width="24" height="24" fill="none" stroke="${data.accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
+            `<svg width="24" height="24" fill="none" stroke="${data.accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+        ];
+
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHTML(data.name)} — ${escapeHTML(data.tagline)}</title>
+<meta name="description" content="${escapeHTML(data.description)}">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:#e0e0e8;line-height:1.6;background:${data.bg}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid ${borderColor};background:${data.bg}ee;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+.nav-brand{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:${dimColor};text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{padding:8px 20px;background:${data.accent};color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;transition:all 0.2s}
+.nav-cta:hover{filter:brightness(1.15);box-shadow:0 4px 16px ${data.accent}44}
+.hero{padding:100px 48px 80px;text-align:center;background:radial-gradient(ellipse at top,${bgLighter},${data.bg});position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,${borderColor},transparent)}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:0.5px;background:${data.accent}18;border:1px solid ${data.accent}44;color:${data.accent};margin-bottom:24px;animation:fadeUp 0.6s ease-out}
+.hero h1{font-size:clamp(36px,5.5vw,60px);font-weight:800;letter-spacing:-2px;margin-bottom:20px;max-width:720px;margin-left:auto;margin-right:auto;line-height:1.1;animation:fadeUp 0.6s ease-out 0.1s both}
+.hero .tagline{font-size:clamp(16px,2vw,20px);color:${dimColor};margin-bottom:16px;max-width:540px;margin-left:auto;margin-right:auto;animation:fadeUp 0.6s ease-out 0.2s both}
+.hero .desc{font-size:15px;color:${lightenColor(data.bg, 40)};max-width:500px;margin:0 auto 40px;line-height:1.7;animation:fadeUp 0.6s ease-out 0.3s both}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.6s ease-out 0.4s both}
+.cta-btn{display:inline-block;padding:14px 36px;background:${data.accent};color:#fff;text-decoration:none;border-radius:8px;font-size:16px;font-weight:700;transition:all 0.3s;box-shadow:0 4px 20px ${data.accent}44}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px ${data.accent}66}
+.cta-btn-ghost{display:inline-block;padding:14px 36px;background:transparent;color:#fff;text-decoration:none;border-radius:8px;font-size:16px;font-weight:600;border:1px solid ${borderColor};transition:all 0.3s}
+.cta-btn-ghost:hover{border-color:${data.accent};background:${data.accent}11}
+.trust-bar{padding:40px 48px;border-bottom:1px solid ${borderColor};text-align:center;background:${bgLight}}
+.trust-bar p{font-size:13px;color:${dimColor};text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:20px}
+.trust-logos{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;align-items:center;opacity:0.4}
+.trust-logos span{font-size:18px;font-weight:700;letter-spacing:1px;color:${dimColor}}
+.features{padding:100px 48px;background:${data.bg}}
+.features-header{text-align:center;margin-bottom:64px}
+.features-header .label{display:inline-block;padding:5px 14px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:${data.accent}15;color:${data.accent};margin-bottom:16px}
+.features-header h2{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.features-header p{color:${dimColor};font-size:16px;max-width:480px;margin:0 auto}
+.features-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.feature-card{background:${bgLight};border:1px solid ${borderColor};border-radius:12px;padding:32px;transition:all 0.3s}
+.feature-card:hover{border-color:${data.accent}55;transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.feature-card .icon-wrap{width:48px;height:48px;border-radius:10px;background:${data.accent}15;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.feature-card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.feature-card p{font-size:14px;color:${dimColor};line-height:1.7}
+.stats{padding:80px 48px;background:${bgLight};border-top:1px solid ${borderColor};border-bottom:1px solid ${borderColor}}
+.stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
+.stat-item .stat-number{font-size:clamp(32px,4vw,48px);font-weight:800;color:${data.accent};letter-spacing:-1px}
+.stat-item .stat-label{font-size:14px;color:${dimColor};margin-top:4px}
+.testimonial{padding:80px 48px;background:${data.bg};text-align:center}
+.testimonial-card{max-width:600px;margin:0 auto;background:${bgLight};border:1px solid ${borderColor};border-radius:16px;padding:40px}
+.testimonial-card blockquote{font-size:18px;font-style:italic;color:rgba(255,255,255,0.85);margin-bottom:24px;line-height:1.7}
+.testimonial-card .author{font-size:14px;color:${dimColor}}
+.testimonial-card .author strong{color:#fff}
+.bottom-cta{padding:100px 48px;text-align:center;background:linear-gradient(180deg,${data.bg},${bgLight})}
+.bottom-cta h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.bottom-cta p{color:${dimColor};margin-bottom:40px;font-size:16px;max-width:480px;margin-left:auto;margin-right:auto}
+footer{padding:48px;border-top:1px solid ${borderColor};background:${data.bg}}
+.footer-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+.footer-brand{font-size:18px;font-weight:800;margin-bottom:8px}
+.footer-desc{font-size:13px;color:${dimColor};line-height:1.6}
+.footer-col h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:${dimColor};margin-bottom:16px;font-weight:600}
+.footer-col a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color 0.2s}
+.footer-col a:hover{color:${data.accent}}
+.footer-bottom{max-width:960px;margin:24px auto 0;padding-top:24px;border-top:1px solid ${borderColor};text-align:center;font-size:12px;color:${lightenColor(data.bg, 30)}}
+@media(max-width:768px){nav{padding:12px 20px}.nav-links{display:none}.hero{padding:60px 20px 60px}.features{padding:60px 20px}.stats{padding:60px 20px}.stats-inner{grid-template-columns:1fr;gap:24px}.footer-inner{grid-template-columns:1fr;gap:24px}.trust-logos{gap:24px}}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-brand">${escapeHTML(data.name)}</div>
+<div class="nav-links">
+<a href="#features">Features</a>
+<a href="#proof">Testimonials</a>
+<a href="${escapeHTML(data.ctaLink)}" class="nav-cta">${escapeHTML(data.ctaText)}</a>
+</div>
+</nav>
+<section class="hero">
+<div class="hero-badge">Now Available</div>
+<h1>${escapeHTML(data.name)}</h1>
+<p class="tagline">${escapeHTML(data.tagline)}</p>
+<p class="desc">${escapeHTML(data.description)}</p>
+<div class="hero-btns">
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+<a href="#features" class="cta-btn-ghost">Learn More</a>
+</div>
+</section>
+<section class="trust-bar">
+<p>Trusted by teams everywhere</p>
+<div class="trust-logos">
+<span>ACME</span><span>GLOBEX</span><span>INITECH</span><span>HOOLI</span><span>UMBRELLA</span>
+</div>
+</section>
+<section class="features" id="features">
+<div class="features-header">
+<div class="label">Features</div>
+<h2>Everything you need</h2>
+<p>Built with the tools and workflows your team already loves.</p>
+</div>
+<div class="features-grid">
+${data.features.map((f, i) => `<div class="feature-card">
+<div class="icon-wrap">${featureIcons[i]}</div>
+<h3>${escapeHTML(f.title)}</h3>
+<p>${escapeHTML(f.desc)}</p>
+</div>`).join('\n')}
+</div>
+</section>
+<section class="stats">
+<div class="stats-inner">
+<div class="stat-item"><div class="stat-number">10x</div><div class="stat-label">Faster workflows</div></div>
+<div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime SLA</div></div>
+<div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Happy customers</div></div>
+</div>
+</section>
+<section class="testimonial" id="proof">
+<div class="testimonial-card">
+<blockquote>"${escapeHTML(data.name)} transformed our workflow. We shipped 3x faster in the first month."</blockquote>
+<div class="author"><strong>Sarah Chen</strong>, Head of Product</div>
+</div>
+</section>
+<section class="bottom-cta">
+<h2>Ready to get started?</h2>
+<p>Join hundreds of teams already using ${escapeHTML(data.name)} to move faster.</p>
+<a href="${escapeHTML(data.ctaLink)}" class="cta-btn">${escapeHTML(data.ctaText)}</a>
+</section>
+<footer>
+<div class="footer-inner">
+<div><div class="footer-brand">${escapeHTML(data.name)}</div><p class="footer-desc">${escapeHTML(data.description).substring(0, 120)}</p></div>
+<div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#">Pricing</a><a href="#">Changelog</a></div>
+<div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Contact</a></div>
+</div>
+<div class="footer-bottom">&copy; ${new Date().getFullYear()} ${escapeHTML(data.name)}. All rights reserved.</div>
+</footer>
+</body>
+</html>`;
+    }
+
+    function lightenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min(255, (num >> 16) + amt);
+        const G = Math.min(255, ((num >> 8) & 0x00FF) + amt);
+        const B = Math.min(255, (num & 0x0000FF) + amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max(0, (num >> 16) - amt);
+        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        const B = Math.max(0, (num & 0x0000FF) - amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    function shiftHue(hex, degrees) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        let r = (num >> 16) / 255, g = ((num >> 8) & 0xFF) / 255, b = (num & 0xFF) / 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+        let h = 0, s = max === 0 ? 0 : d / max, v = max;
+        if (d !== 0) {
+            if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+            else if (max === g) h = ((b - r) / d + 2) / 6;
+            else h = ((r - g) / d + 4) / 6;
+        }
+        h = ((h * 360 + degrees) % 360) / 360;
+        if (h < 0) h += 1;
+        const i = Math.floor(h * 6), f = h * 6 - i, p = v * (1 - s), q = v * (1 - f * s), t = v * (1 - (1 - f) * s);
+        switch (i % 6) {
+            case 0: r = v; g = t; b = p; break; case 1: r = q; g = v; b = p; break;
+            case 2: r = p; g = v; b = t; break; case 3: r = p; g = q; b = v; break;
+            case 4: r = t; g = p; b = v; break; case 5: r = v; g = p; b = q; break;
+        }
+        return '#' + [r, g, b].map(c => Math.round(c * 255).toString(16).padStart(2, '0')).join('');
+    }
+
+    function updatePreview() {
+        const data = getFormData();
+        const html = generateHTML(data);
+        const iframe = document.getElementById('previewIframe');
+        const placeholder = document.getElementById('placeholder');
+
+        placeholder.style.display = 'none';
+        iframe.style.display = 'block';
+
+        const blob = new Blob([html], { type: 'text/html' });
+        iframe.src = URL.createObjectURL(blob);
+    }
+
+    function downloadPage() {
+        const data = getFormData();
+        const html = generateHTML(data);
+        const blob = new Blob([html], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = (data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'landing-page') + '.html';
+        a.click();
+        showToast('Landing page downloaded!');
+    }
+
+    function copyHTML() {
+        const data = getFormData();
+        const html = generateHTML(data);
+        navigator.clipboard.writeText(html).then(() => {
+            showToast('HTML copied to clipboard!');
+        }).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = html;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('HTML copied to clipboard!');
+        });
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Check pro status on load (Stripe redirect or localStorage)
+    checkProStatus();
+
+    // Auto-preview on load with defaults
+    setTimeout(updatePreview, 300);
+    </script>
+</body>
+</html>
