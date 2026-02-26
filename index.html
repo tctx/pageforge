@@ -465,7 +465,7 @@
                 <h3>Unlock 4 Premium Templates</h3>
                 <p>Gradient, SaaS, Minimal, and Dark Pro templates</p>
                 <div class="price">$9 <span>one-time</span></div>
-                <a href="https://buy.stripe.com/cNi5kD15QbNx9DV1JjeQM01" id="proBuyBtn" class="btn btn-primary" style="text-decoration:none" target="_blank">Get PageForge Pro</a>
+                <a href="#" id="proBuyBtn" class="btn btn-primary" style="text-decoration:none" target="_blank">Get PageForge Pro</a>
                 <div class="pro-active-msg">Pro Unlocked</div>
                 <button class="pro-restore" onclick="restorePurchase()">Already purchased? Restore</button>
             </div>
@@ -605,12 +605,18 @@
     <div class="toast" id="toast">Copied to clipboard!</div>
 
     <script>
+    // ── Config ──────────────────────────────────────────────
+    // Stripe Payment Link — update this if you regenerate the link
+    const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/cNi5kD15QbNx9DV1JjeQM01';
+    // ────────────────────────────────────────────────────────
+
     let selectedTemplate = 'midnight';
     let proUnlocked = false;
 
     function unlockPro(silent) {
         proUnlocked = true;
         localStorage.setItem('pageforge_pro', 'true');
+        localStorage.setItem('pageforge_pro_date', new Date().toISOString());
 
         // Remove locked class from premium templates
         document.querySelectorAll('.template-option.locked').forEach(function(el) {
@@ -643,20 +649,27 @@
             return;
         }
 
-        // 2. Check localStorage for persisted pro state
+        // 2. Check hash-based fallback (some redirect configs use hash)
+        if (window.location.hash === '#pro-activated') {
+            unlockPro();
+            window.history.replaceState({}, '', window.location.pathname);
+            return;
+        }
+
+        // 3. Check localStorage for persisted pro state
         if (localStorage.getItem('pageforge_pro') === 'true') {
             unlockPro(true);
         }
     }
 
     function restorePurchase() {
-        // Check if pro was previously saved
+        // Check if pro was previously saved in this browser
         if (localStorage.getItem('pageforge_pro') === 'true') {
             unlockPro();
             return;
         }
         // Prompt: no record found — they need to complete purchase first
-        showToast('No purchase found. Complete checkout, then return here to activate.');
+        showToast('No purchase found on this device. Complete checkout and return here.');
     }
 
     function selectTemplate(el) {
@@ -1095,6 +1108,12 @@ ${data.features.map((f, i) => `<div class="feature-card">
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2500);
     }
+
+    // Wire up the Pro buy button from config
+    (function() {
+        var btn = document.getElementById('proBuyBtn');
+        if (btn) btn.href = STRIPE_PAYMENT_LINK;
+    })();
 
     // Check pro status on load (Stripe redirect or localStorage)
     checkProStatus();

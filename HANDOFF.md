@@ -20,7 +20,8 @@ A free web tool that generates beautiful, responsive landing pages in 60 seconds
 
 ## Needs Tommy
 - [ ] Deploy to Vercel (or custom domain)
-- [ ] Stripe payment link for Pro ($9) — needs to be created and wired into the "Get PageForge Pro" button
+- [x] Stripe payment link wired into "Get PageForge Pro" button (link: `buy.stripe.com/cNi5kD...`)
+- [ ] **Stripe: configure success redirect URL** → `https://YOUR-DOMAIN/?checkout=success` (see STRIPE-SETUP.md)
 - [ ] Marketing: share on Twitter/social
 
 ## Growth strategy
