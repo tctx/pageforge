@@ -21,11 +21,32 @@ A free web tool that generates beautiful, responsive landing pages in 60 seconds
 ## Needs Tommy
 - [x] Push to GitHub — **DONE** → https://github.com/tctx/pageforge
 - [x] Deploy — **LIVE** at https://tctx.github.io/pageforge/ (GitHub Pages, deployed 2026-02-27)
-  - Vercel was blocked (no credentials on machine, `pageforge.vercel.app` taken by someone else)
-  - Can migrate to Vercel later if desired: `vercel login` → `./deploy.sh`
+- [ ] **Deploy to Vercel** — blocked on `vercel login` (see below)
 - [x] Stripe payment link wired into "Get PageForge Pro" button (link: `buy.stripe.com/cNi5kD...`)
 - [x] **Stripe: success redirect URL configured** → `https://tctx.github.io/pageforge/?checkout=success` (updated 2026-02-27)
 - [ ] Marketing: share on Twitter/social
+
+## Vercel Deploy (Tommy action required)
+
+Deploy scripts are ready. Just need auth. Pick **one** option:
+
+### Option A: CLI (30 seconds)
+```bash
+cd ~/Desktop/test/longshanks/projects/pageforge
+vercel login          # opens browser, authorize
+./deploy.sh           # deploys to production
+```
+
+### Option B: Dashboard (no CLI needed)
+1. Go to https://vercel.com/new
+2. Import: `github.com/tctx/pageforge`
+3. Framework: **Other** (static site)
+4. Deploy — done
+
+### After deploying:
+- Note: `pageforge.vercel.app` is taken — project will deploy as `pageforge-gen.vercel.app`
+- Update Stripe redirect URL to your new Vercel domain (see STRIPE-SETUP.md, Step 3)
+- Consider adding a custom domain like `pageforge.dev` in Vercel dashboard
 
 ## Growth strategy
 - SEO: "free landing page generator", "landing page builder no code"
