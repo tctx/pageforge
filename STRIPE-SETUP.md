@@ -37,9 +37,9 @@ This is the most important step. After checkout, Stripe needs to redirect back t
 5. Set **Confirmation page** to: **Don't show confirmation page**
 6. Set **Custom redirect URL** to:
    ```
-   https://YOUR-DOMAIN.vercel.app/?checkout=success
+   https://tctx.github.io/pageforge/?checkout=success
    ```
-   Replace `YOUR-DOMAIN` with your actual deployed URL.
+   (**Already configured** — updated 2026-02-27 via Stripe API)
 7. Save
 
 ## How the Unlock Flow Works
