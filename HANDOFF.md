@@ -19,7 +19,9 @@ A free web tool that generates beautiful, responsive landing pages in 60 seconds
 - [x] Vercel-ready (vercel.json)
 
 ## Needs Tommy
-- [ ] Deploy to Vercel (or custom domain)
+- [x] Push to GitHub — **DONE** → https://github.com/tctx/pageforge
+- [ ] Deploy to Vercel — run `vercel login` then `./push-and-deploy.sh`
+  - OR import repo at https://vercel.com/new → select `tctx/pageforge` (auto-deploys on push)
 - [x] Stripe payment link wired into "Get PageForge Pro" button (link: `buy.stripe.com/cNi5kD...`)
 - [ ] **Stripe: configure success redirect URL** → `https://YOUR-DOMAIN/?checkout=success` (see STRIPE-SETUP.md)
 - [ ] Marketing: share on Twitter/social
