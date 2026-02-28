@@ -1,7 +1,7 @@
 {
   "venture_slug": "pageforge",
   "version": 1,
-  "last_updated": "2026-02-27T02:00:11Z",
+  "last_updated": "2026-02-28T12:30:12Z",
   "artifacts": [
     {
       "id": "art-1772144324-508",
@@ -30,7 +30,7 @@
       "description": null,
       "created_at": "2026-02-26T22:18:44Z",
       "created_by": null,
-      "size_bytes": 800,
+      "size_bytes": 2842,
       "tags": []
     },
     {
@@ -40,7 +40,7 @@
       "description": null,
       "created_at": "2026-02-26T22:18:44Z",
       "created_by": null,
-      "size_bytes": 1367,
+      "size_bytes": 2727,
       "tags": []
     },
     {
@@ -50,7 +50,7 @@
       "description": null,
       "created_at": "2026-02-26T22:33:53Z",
       "created_by": null,
-      "size_bytes": 2436,
+      "size_bytes": 2448,
       "tags": []
     },
     {
@@ -60,7 +60,27 @@
       "description": null,
       "created_at": "2026-02-27T01:50:38Z",
       "created_by": null,
-      "size_bytes": 4577,
+      "size_bytes": 5035,
+      "tags": []
+    },
+    {
+      "id": "art-1772157800-036",
+      "path": "push-and-deploy.sh",
+      "type": "code",
+      "description": null,
+      "created_at": "2026-02-27T02:03:20Z",
+      "created_by": null,
+      "size_bytes": 2609,
+      "tags": []
+    },
+    {
+      "id": "art-1772157800-214",
+      "path": ".gitignore",
+      "type": "config",
+      "description": null,
+      "created_at": "2026-02-27T02:03:20Z",
+      "created_by": null,
+      "size_bytes": 31,
       "tags": []
     }
   ],

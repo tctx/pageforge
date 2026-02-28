@@ -28,20 +28,26 @@ A free web tool that generates beautiful, responsive landing pages in 60 seconds
 
 ## Vercel Deploy (Tommy action required)
 
-Deploy scripts are ready. Just need auth. Pick **one** option:
+Everything is ready — code, config, scripts, CI workflow. Just need one auth step. Pick **one** option:
 
-### Option A: CLI (30 seconds)
-```bash
-cd ~/Desktop/test/longshanks/projects/pageforge
-vercel login          # opens browser, authorize
-./deploy.sh           # deploys to production
-```
-
-### Option B: Dashboard (no CLI needed)
+### Option A: Dashboard Import (easiest, recommended)
 1. Go to https://vercel.com/new
 2. Import: `github.com/tctx/pageforge`
 3. Framework: **Other** (static site)
-4. Deploy — done
+4. Deploy — done in 30 seconds
+5. **Bonus**: all future `git push` to main will auto-deploy
+
+### Option B: GitHub Actions (fully automated, recommended for CI)
+1. Go to https://vercel.com/account/tokens → Create a token (name: "pageforge-ci")
+2. Go to https://github.com/tctx/pageforge/settings/secrets/actions/new
+3. Name: `VERCEL_TOKEN`, Value: paste the token
+4. Push any commit to `main` → auto-deploys to Vercel via `.github/workflows/deploy.yml`
+
+### Option C: CLI one-liner
+```bash
+# Create token at https://vercel.com/account/tokens, then:
+VERCEL_TOKEN=<token> ~/Desktop/test/longshanks/projects/pageforge/deploy.sh
+```
 
 ### After deploying:
 - Note: `pageforge.vercel.app` is taken — project will deploy as `pageforge-gen.vercel.app`
