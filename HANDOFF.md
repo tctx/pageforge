@@ -38,15 +38,20 @@ Everything is ready — code, config, scripts, CI workflow. Just need one auth s
 5. **Bonus**: all future `git push` to main will auto-deploy
 
 ### Option B: GitHub Actions (fully automated, recommended for CI)
-1. Go to https://vercel.com/account/tokens → Create a token (name: "pageforge-ci")
-2. Go to https://github.com/tctx/pageforge/settings/secrets/actions/new
-3. Name: `VERCEL_TOKEN`, Value: paste the token
+1. Go to https://vercel.com/new → Import `github.com/tctx/pageforge` → Deploy once (creates the project)
+2. Get IDs: run `npx vercel link` locally, then check `.vercel/project.json` for `orgId` and `projectId`
+3. Go to https://github.com/tctx/pageforge/settings/secrets/actions and add **3 secrets**:
+   - `VERCEL_TOKEN` — from https://vercel.com/account/tokens
+   - `VERCEL_ORG_ID` — the `orgId` from step 2
+   - `VERCEL_PROJECT_ID` — the `projectId` from step 2
 4. Push any commit to `main` → auto-deploys to Vercel via `.github/workflows/deploy.yml`
 
-### Option C: CLI one-liner
+### Option C: CLI via vault (Longshanks can auto-deploy)
 ```bash
-# Create token at https://vercel.com/account/tokens, then:
-VERCEL_TOKEN=<token> ~/Desktop/test/longshanks/projects/pageforge/deploy.sh
+# Create token at https://vercel.com/account/tokens, then add to vault:
+bash ~/Desktop/test/longshanks/scripts/vault-manager.sh --add VERCEL_TOKEN <token>
+# Then deploy:
+~/Desktop/test/longshanks/projects/pageforge/deploy.sh
 ```
 
 ### After deploying:
